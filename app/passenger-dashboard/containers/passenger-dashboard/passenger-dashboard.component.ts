@@ -5,7 +5,10 @@ import {Component, OnInit} from '@angular/core';
   selector: 'passenger-dashboard',
   template: `
     <h1>Passenger Dashboard</h1><div>
-      <h3>Airline Passengers</h3>
+
+      <passenger-count [items]="passengers"></passenger-count>
+
+      <passenger-detail></passenger-detail>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
           <span
