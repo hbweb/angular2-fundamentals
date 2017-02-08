@@ -1,24 +1,64 @@
 import { Passenger } from './../../models/passenger.interface';
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'passenger-detail',
   styleUrls: ['passenger-detail.component.scss'],
   template: `
     <div>
-      <span class="status" [class.checked-in]="passengerDetail.checkedIn"></span>
-      {{ passengerDetail.fullname }}
+      <span class="status" [class.checked-in]="detail.checkedIn"></span>
+      <div *ngIf="editing"><input type="text" [value]="detail.fullname" (input)="onFullnameChange(name.value)" #name></div>
+      {{ detail.fullname }}
+
       <div class="date">
         Check in date:
-        {{ passengerDetail.checkInDate ? (passengerDetail.checkInDate | date: 'yMMMMd' | uppercase) : 'Not checked in' }}
+        {{ detail.checkInDate ? (detail.checkInDate | date: 'yMMMMd' | uppercase) : 'Not checked in' }}
       </div>
+
       <div class="children">
-        Children: {{ passengerDetail.children?.length || 0 }}
+        Children: {{ detail.children?.length || 0 }}
       </div>
+
+      <button (click)="toggleEdit()">
+        {{editing ? 'Done' : 'Edit'}}
+      </button>
+
+      <button (click)="onRemove()">Remove</button>
+
     </div>
   `
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent implements OnChanges {
   @Input()
-  passengerDetail: Passenger;
+  detail: Passenger;
+
+  @Output()
+  remove: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+
+  editing: boolean = false;
+
+  ngOnChanges(changes){
+    if(changes.detail){
+      this.detail = Object.assign({}, changes.detail.currentValue);
+    }
+  }
+
+  onFullnameChange(value: string ){
+    this.detail.fullname = value;
+  }
+
+  toggleEdit(){
+    if (this.editing) {
+      this.edit.emit(this.detail);
+    }
+    this.editing = !this.editing;
+  }
+
+  onRemove(){
+    this.remove.emit(this.detail);
+  }
+
 }

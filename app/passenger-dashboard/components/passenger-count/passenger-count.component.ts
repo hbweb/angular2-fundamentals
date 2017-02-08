@@ -6,7 +6,7 @@ import { Passenger } from './../../models/passenger.interface';
   selector: 'passenger-count',
   template: `
    <h3>Airline Passengers</h3>
-   <div>Total Passenger checked in {{ checkedInCount() }} out of {{ items.length }}</div>
+   <div>Total Passenger checked in {{ checkedInCount() }} out of {{ items?.length }}</div>
   `
 })
 export class PassengerCountComponent {
