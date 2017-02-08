@@ -1,5 +1,5 @@
 import { Passenger } from './../../models/passenger.interface';
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'passenger-detail',
@@ -40,24 +40,24 @@ export class PassengerDetailComponent implements OnChanges {
 
   editing: boolean = false;
 
-  ngOnChanges(changes){
-    if(changes.detail){
+  ngOnChanges(changes) {
+    if (changes.detail) {
       this.detail = Object.assign({}, changes.detail.currentValue);
     }
   }
 
-  onFullnameChange(value: string ){
+  onFullnameChange(value: string) {
     this.detail.fullname = value;
   }
 
-  toggleEdit(){
+  toggleEdit() {
     if (this.editing) {
       this.edit.emit(this.detail);
     }
     this.editing = !this.editing;
   }
 
-  onRemove(){
+  onRemove() {
     this.remove.emit(this.detail);
   }
 
