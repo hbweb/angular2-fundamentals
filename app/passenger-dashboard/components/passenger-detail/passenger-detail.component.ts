@@ -1,13 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Passenger } from './../../models/passenger.interface';
+import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'passenger-detail',
+  styleUrls: ['passenger-detail.component.scss'],
   template: `
-    <div>Passenger Detail</div>
+    <div>
+      <span class="status" [class.checked-in]="passengerDetail.checkedIn"></span>
+      {{ passengerDetail.fullname }}
+      <div class="date">
+        Check in date:
+        {{ passengerDetail.checkInDate ? (passengerDetail.checkInDate | date: 'yMMMMd' | uppercase) : 'Not checked in' }}
+      </div>
+      <div class="children">
+        Children: {{ passengerDetail.children?.length || 0 }}
+      </div>
+    </div>
   `
 })
-export class PassengerDetailComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit() { }
+export class PassengerDetailComponent {
+  @Input()
+  passengerDetail: Passenger;
 }

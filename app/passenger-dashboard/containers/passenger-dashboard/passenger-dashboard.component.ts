@@ -1,5 +1,5 @@
 import { Passenger } from './../../models/passenger.interface';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'passenger-dashboard',
@@ -7,34 +7,19 @@ import {Component, OnInit} from '@angular/core';
     <h1>Passenger Dashboard</h1><div>
 
       <passenger-count [items]="passengers"></passenger-count>
+      <passenger-detail *ngFor="let passenger of passengers" [passengerDetail]="passenger"></passenger-detail>
 
-      <passenger-detail></passenger-detail>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span
-            class="status"
-            [class.checked-in]="passenger.checkedIn"></span>
-          {{ i }}: {{ passenger.fullname }}
-          <div class="date">
-            Check in date:
-            {{ passenger.checkInDate ? (passenger.checkInDate | date: 'yMMMMd' | uppercase) : 'Not checked in' }}
-          </div>
-          <div class="children">
-            Children: {{ passenger.children?.length || 0 }}
-          </div>
-        </li>
-      </ul>
     </div>
   `,
   styleUrls: ['passenger-dashboard.component.scss']
 })
 
-export class PassengerDashboardComponent implements OnInit{
+export class PassengerDashboardComponent implements OnInit {
   private passengers: Passenger[];
 
-  constructor(){ }
+  constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.passengers = [{
       id: 1,
       fullname: 'Stephen',
@@ -46,7 +31,7 @@ export class PassengerDashboardComponent implements OnInit{
       fullname: 'Rose',
       checkedIn: false,
       checkInDate: null,
-      children: [{ name: 'Ted', age: 12 },{ name: 'Chloe', age: 7 }]
+      children: [{ name: 'Ted', age: 12 }, { name: 'Chloe', age: 7 }]
     }, {
       id: 3,
       fullname: 'James',
