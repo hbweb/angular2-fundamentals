@@ -105,7 +105,7 @@ module.exports = {
     }),
     new ts.TsConfigPathsPlugin(),
     new ts.CheckerPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
     extensions: ['.ts', '.js'],
