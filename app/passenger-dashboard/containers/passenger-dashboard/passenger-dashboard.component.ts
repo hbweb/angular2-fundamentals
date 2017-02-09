@@ -32,10 +32,13 @@ export class PassengerDashboardComponent implements OnInit {
   }
 
   handleRemove(event: Passenger) {
-    console.log('Handling Remove ', event);
-    this.passengers = this.passengers.filter((passenger: Passenger) => {
-      return event.id !== passenger.id;
-    })
+    this._passengerService
+      .deletePassenger(event)
+      .subscribe((data: Passenger) => {
+        this.passengers = this.passengers.filter((passenger: Passenger) => {
+          return event.id !== passenger.id;
+        })
+      })
   }
 
   handleEdit(event: Passenger) {

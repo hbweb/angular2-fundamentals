@@ -4,8 +4,7 @@ import { Passenger } from './models/passenger.interface';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
+import '../core/rxjs-extension';
 
 const PASSENGER_API: string = '/api/passengers';
 
@@ -17,18 +16,21 @@ export class PassengerDashboardService{
   getPassengers(): Observable<Passenger[]> {
     return this._http
       .get(PASSENGER_API)
-      .map((response: Response) => response.json());
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json()));
   }
 
   updatePassenger(passenger: Passenger): Observable<Passenger> {
     return this._http
       .put(`${PASSENGER_API}/${passenger.id}`, passenger)
-      .map((response: Response) => response.json());
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json()));
   }
 
-  insertPassenger(passenger: Passenger): Observable<Passenger[]> {
+  deletePassenger(passenger: Passenger): Observable<Passenger> {
     return this._http
-      .get(PASSENGER_API)
-      .map((response: Response) => response.json());
+      .delete(`${PASSENGER_API}/${passenger.id}`)
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json()));
   }
 }

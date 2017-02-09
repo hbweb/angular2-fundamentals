@@ -8,22 +8,6 @@
       "children": null
     },
     {
-      "id": 2,
-      "fullname": "Rosee",
-      "checkedIn": false,
-      "checkInDate": null,
-      "children": [
-        {
-          "name": "Ted",
-          "age": 12
-        },
-        {
-          "name": "Chloe",
-          "age": 7
-        }
-      ]
-    },
-    {
       "id": 4,
       "fullname": "Louise",
       "checkedIn": true,
@@ -32,6 +16,18 @@
         {
           "name": "Jessica",
           "age": 1
+        }
+      ]
+    },
+     {
+      "id": 2,
+      "fullname": "John",
+      "checkedIn": false,
+      "checkInDate": 1488412800000,
+      "children": [
+        {
+          "name": "Jessica",
+          "age": 5
         }
       ]
     },
