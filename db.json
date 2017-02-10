@@ -1,11 +1,10 @@
 {
   "passengers": [
     {
+      "fullname": "Q H Bui",
       "id": 1,
-      "fullname": "Q Hung Bui ",
-      "checkedIn": true,
-      "checkInDate": 1490742000000,
-      "children": null
+      "checkedIn": false,
+      "baggage": "hold-only"
     },
     {
       "id": 4,
@@ -19,7 +18,7 @@
         }
       ]
     },
-     {
+    {
       "id": 2,
       "fullname": "John",
       "checkedIn": false,

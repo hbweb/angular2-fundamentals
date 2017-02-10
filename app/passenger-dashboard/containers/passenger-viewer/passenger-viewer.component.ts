@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'passenger-viewer',
   template: `
     <div>
-      {{ passenger | json}}
+      <passenger-form [detail]="passenger" (update)="onUpdatePassenger($event)"></passenger-form>
     </div>
   `
 })
@@ -20,5 +20,14 @@ export class PassengerViewerComponent implements OnInit {
     this._passengerService
       .getPassenger(1)
       .subscribe((data: Passenger) => this.passenger = data);
+  }
+
+  onUpdatePassenger(event: Passenger){
+    console.log(event);
+    this._passengerService
+      .updatePassenger(event)
+      .subscribe((data: Passenger) =>{
+        this.passenger = Object.assign({}, this.passenger, event)
+      });
   }
 }
