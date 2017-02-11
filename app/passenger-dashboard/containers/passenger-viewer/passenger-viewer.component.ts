@@ -14,7 +14,8 @@ import { Component, OnInit } from '@angular/core';
 export class PassengerViewerComponent implements OnInit {
   private passenger: Passenger;
 
-  constructor(private _passengerService: PassengerDashboardService) { }
+  constructor(
+    private _passengerService: PassengerDashboardService) { }
 
   ngOnInit() {
     this._passengerService

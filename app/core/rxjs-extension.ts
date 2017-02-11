@@ -6,6 +6,8 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
+
 
 // Observable class extensions
 import 'rxjs/add/observable/of';
