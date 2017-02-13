@@ -1,34 +1,41 @@
-import { Passenger } from './../../models/passenger.interface';
-import { PassengerDashboardService } from './../../passenger-dashboard.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import 'rxjs/add/operator/switchMap';
+
+import { PassengerDashboardService } from '../../passenger-dashboard.service';
+
+import { Passenger } from '../../models/passenger.interface';
 
 @Component({
   selector: 'passenger-viewer',
+  styleUrls: ['passenger-viewer.component.scss'],
   template: `
     <div>
-      <passenger-form [detail]="passenger" (update)="onUpdatePassenger($event)"></passenger-form>
+      <passenger-form
+        [detail]="passenger"
+        (update)="onUpdatePassenger($event)">
+      </passenger-form>
     </div>
   `
 })
-
 export class PassengerViewerComponent implements OnInit {
-  private passenger: Passenger;
-
+  passenger: Passenger;
   constructor(
-    private _passengerService: PassengerDashboardService) { }
-
+    private router: Router,
+    private route: ActivatedRoute,
+    private passengerService: PassengerDashboardService
+  ) {}
   ngOnInit() {
-    this._passengerService
-      .getPassenger(1)
+    this.route.params
+      .switchMap((data: Passenger) => this.passengerService.getPassenger(data.id))
       .subscribe((data: Passenger) => this.passenger = data);
   }
-
-  onUpdatePassenger(event: Passenger){
-    console.log(event);
-    this._passengerService
+  onUpdatePassenger(event: Passenger) {
+    this.passengerService
       .updatePassenger(event)
-      .subscribe((data: Passenger) =>{
-        this.passenger = Object.assign({}, this.passenger, event)
+      .subscribe((data: Passenger) => {
+        this.passenger = Object.assign({}, this.passenger, event);
       });
   }
 }

@@ -1,36 +1,44 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 // containers
 import { PassengerDashboardComponent } from './containers/passenger-dashboard/passenger-dashboard.component';
+import { PassengerViewerComponent } from './containers/passenger-viewer/passenger-viewer.component';
 
 // components
 import { PassengerCountComponent } from './components/passenger-count/passenger-count.component';
 import { PassengerDetailComponent } from './components/passenger-detail/passenger-detail.component';
-import { PassengerViewerComponent } from './containers/passenger-viewer/passenger-viewer.component';
 import { PassengerFormComponent } from './components/passenger-form/passenger-form.component';
 
-// Services
+// service
 import { PassengerDashboardService } from './passenger-dashboard.service';
+
+const routes: Routes = [
+  {
+    path: 'passengers',
+    children: [
+     { path: '', component: PassengerDashboardComponent },
+     { path: ':id', component: PassengerViewerComponent }
+    ]
+  }
+];
 
 @NgModule({
   declarations: [
     PassengerDashboardComponent,
+    PassengerViewerComponent,
     PassengerCountComponent,
     PassengerDetailComponent,
-    PassengerViewerComponent,
     PassengerFormComponent
   ],
   imports: [
     CommonModule,
     HttpModule,
-    FormsModule
-  ],
-  exports: [
-    // export this Component so it can be used in other modules.
-    PassengerViewerComponent
+    FormsModule,
+    RouterModule.forChild(routes)
   ],
   providers: [
     PassengerDashboardService

@@ -1,14 +1,13 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Passenger } from '../../models/passenger.interface';
-import { Baggage } from '../../models/baggage.interface';
+import { Baggage } from '../../models/baggage.interace';
 
 @Component({
   selector: 'passenger-form',
   styleUrls: ['passenger-form.component.scss'],
   template: `
     <form (ngSubmit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
-      {{ detail | json }}
 
       <div>
         Passenger name:
@@ -38,7 +37,7 @@ import { Baggage } from '../../models/baggage.interface';
 
       <div>
         <label>
-          <input
+          <input 
             type="checkbox"
             name="checkedIn"
             [ngModel]="detail?.checkedIn"
@@ -48,7 +47,7 @@ import { Baggage } from '../../models/baggage.interface';
 
       <div *ngIf="form.value.checkedIn">
         Check in date:
-        <input
+        <input 
           type="number"
           name="checkInDate"
           [ngModel]="detail?.checkInDate">
@@ -68,7 +67,10 @@ import { Baggage } from '../../models/baggage.interface';
         </select>
       </div>
 
-      <button type="submit" [disabled]="form.invalid" > Update Passenger </button>
+      <button type="submit" [disabled]="form.invalid">
+        Update passenger
+      </button>
+
     </form>
   `
 })
@@ -93,16 +95,15 @@ export class PassengerFormComponent {
     key: 'hand-hold',
     value: 'Hand and hold baggage'
   }];
-
+  
   toggleCheckIn(checkedIn: boolean) {
     if (checkedIn) {
       this.detail.checkInDate = Date.now();
     }
   }
 
-
-  handleSubmit(passenger: Passenger, isValid: boolean){
-    if(isValid){
+  handleSubmit(passenger: Passenger, isValid: boolean) {
+    if (isValid) {
       this.update.emit(passenger);
     }
   }
