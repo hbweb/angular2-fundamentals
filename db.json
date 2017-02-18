@@ -3,8 +3,9 @@
     {
       "fullname": "Q H Bui",
       "id": 1,
-      "checkedIn": false,
-      "baggage": "hold-only"
+      "checkedIn": true,
+      "baggage": "none",
+      "checkInDate": 1487424846225
     },
     {
       "id": 4,
