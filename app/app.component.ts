@@ -37,6 +37,11 @@ export class AppComponent {
       exact: true
     },
     {
+      link: '/questions',
+      name: 'Family Question',
+      exact: true
+    },
+    {
       link: '/oops',
       name: '404',
       exact: false
